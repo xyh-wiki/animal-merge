@@ -1,0 +1,743 @@
+/* 
+ * @Author:XYH
+ * @Date:2025-11-23
+ * @Description:
+ *  全局样式文件，包含布局、棋盘、动画、帮助页面等样式定义。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #faf8ef;
+  color: #776e65;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* App 布局 */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 24px 40px;
+  gap: 32px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.game-panel {
+  padding: 12px 4px 24px;
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-panel {
+  max-width: 440px;
+  width: 100%;
+}
+
+/* 响应式：小屏幕下帮助区放在游戏下方 */
+@media (max-width: 900px) {
+  .app-main {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 32px;
+  }
+  .side-panel {
+    max-width: 600px;
+  }
+}
+
+/* 页脚 */
+.app-footer {
+  text-align: center;
+  padding: 12px 8px 18px;
+  font-size: 12px;
+  color: #8f7a66;
+}
+
+/* 头部区域 */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.game-title-block {
+  max-width: 260px;
+}
+
+.game-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #776e65;
+}
+
+.game-subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #8f7a66;
+}
+
+.game-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 分数区 */
+.score-board {
+  display: flex;
+  gap: 8px;
+}
+
+.score-box {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  min-width: 72px;
+  text-align: center;
+  color: #f9f6f2;
+}
+
+.score-label {
+  display: block;
+  font-size: 10px;
+}
+
+.score-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 按钮 */
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+.btn-primary:hover {
+  background: #9f8b77;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 游戏提示文字 */
+.game-tip {
+  font-size: 12px;
+  color: #8f7a66;
+  margin: 8px 0 12px;
+}
+
+/* 棋盘 */
+.board-wrapper {
+  position: relative;
+}
+
+.board {
+  position: relative;
+  background: #bbada0;
+  border-radius: 8px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 8px;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* 单个格子（空格或有动物时） */
+.cell {
+  width: 100%;
+  padding-bottom: 100%; /* 正方形：利用 padding 百分比相对于宽度的特性 */
+  background: #cdc1b4;
+  border-radius: 6px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #776e65;
+}
+
+/* 让内部内容绝对居中（兼顾 padding trick） */
+.cell > * {
+  position: absolute;
+}
+
+/* 动物 emoji 与名称 */
+.animal-emoji {
+  font-size: 32px;
+  line-height: 1;
+  top: 18px;
+}
+
+.animal-name {
+  font-size: 12px;
+  top: 52px;
+}
+
+/* 数值对应的配色（经典合并消除配色风格） */
+.tile-2 {
+  background: #eee4da;
+}
+.tile-4 {
+  background: #ede0c8;
+}
+.tile-8 {
+  background: #f2b179;
+  color: #f9f6f2;
+}
+.tile-16 {
+  background: #f59563;
+  color: #f9f6f2;
+}
+.tile-32 {
+  background: #f67c5f;
+  color: #f9f6f2;
+}
+.tile-64 {
+  background: #f65e3b;
+  color: #f9f6f2;
+}
+.tile-128 {
+  background: #edcf72;
+  color: #f9f6f2;
+}
+.tile-256 {
+  background: #edcc61;
+  color: #f9f6f2;
+}
+.tile-512 {
+  background: #edc850;
+  color: #f9f6f2;
+}
+.tile-1024 {
+  background: #edc53f;
+  color: #f9f6f2;
+}
+/* ===== 动画区域：新方块出现、合并闪光 / 放大效果 ===== */
+
+/* 新生成方块：从小放大到正常尺寸 */
+@keyframes tile-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tile-new {
+  animation: tile-pop 0.2s ease-out;
+}
+
+/* 合并后的方块：轻微放大 + 光晕效果 */
+@keyframes tile-merge {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.tile-merged {
+  animation: tile-merge 0.25s ease-out;
+}
+
+/* Game Over 遮罩 */
+.game-over-mask {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: rgba(238, 228, 218, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+}
+
+.game-over-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.game-over-text {
+  font-size: 13px;
+  margin-bottom: 12px;
+  color: #8f7a66;
+}
+
+/* 动物进化条 */
+.evolution-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.evolution-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.evolution-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.evolution-name {
+  font-size: 10px;
+  color: #555;
+}
+
+.evolution-arrow {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 帮助 / FAQ 页面样式 */
+.help-page {
+  background: #fdfbf5;
+  border-radius: 12px;
+  padding: 16px 18px 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+}
+
+.help-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.help-subtitle {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: #8f7a66;
+}
+
+.help-section {
+  margin-bottom: 12px;
+}
+
+.help-section h3 {
+  margin: 8px 0 4px;
+  font-size: 14px;
+}
+
+.help-section h4 {
+  margin: 6px 0 2px;
+  font-size: 13px;
+}
+
+.help-section p {
+  margin: 2px 0 4px;
+  line-height: 1.4;
+}
+
+.help-section ul {
+  margin: 4px 0 4px 18px;
+  padding: 0;
+}
+
+.help-section li {
+  margin-bottom: 2px;
+}
+
+.help-list-two-cols {
+  columns: 2;
+  column-gap: 12px;
+}
+
+/* 小屏幕优化：帮助列表改为单列 */
+@media (max-width: 480px) {
+  .help-list-two-cols {
+    columns: 1;
+  }
+}
+
+
+/* 难度选择区域样式 */
+.difficulty-select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 8px;
+}
+
+.difficulty-label {
+  font-size: 10px;
+  color: #f9f6f2;
+  margin-bottom: 2px;
+}
+
+.difficulty-control {
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+
+/* 头部 meta 信息行：最高动物与步数 */
+.game-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.high-animal-pill,
+.moves-pill {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(250, 248, 239, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.meta-label {
+  font-size: 10px;
+  color: #8f7a66;
+}
+
+.meta-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #776e65;
+}
+
+/* 模式切换按钮区域 */
+.mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.mode-tab {
+  border: none;
+  outline: none;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(238, 228, 218, 0.9);
+  color: #776e65;
+}
+
+.mode-tab.active {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+.mode-description {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #8f7a66;
+}
+
+/* Undo / Hint 工具条 */
+.game-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.toolbar-left {
+  display: flex;
+  gap: 6px;
+}
+
+.toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.toolbar-info {
+  color: #8f7a66;
+}
+
+.toolbar-hint {
+  color: #776e65;
+  font-weight: 600;
+}
+
+/* 解锁新动物横幅 */
+.unlock-banner {
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  color: #776e65;
+  animation: unlockPulse 800ms ease-out;
+}
+
+.unlock-banner-dragon {
+  background: linear-gradient(135deg, #ffe08a, #ff9f43);
+  color: #5c3b09;
+}
+
+/* Game Over 摘要区 */
+.game-over-summary {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #f9f6f2;
+  text-align: left;
+}
+
+.game-over-summary > div {
+  margin-bottom: 2px;
+}
+
+.rating-text {
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* 解锁动画效果 */
+@keyframes unlockPulse {
+  0% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 小屏幕下工具条折行布局 */
+@media (max-width: 600px) {
+  .game-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .toolbar-right {
+    justify-content: flex-start;
+  }
+}
+
+/* 顶部整体导航条，用于放置品牌与语言切换 */
+.top-header {
+  width: 100%;
+  background: linear-gradient(90deg, #f5efe3, #f9f6f2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.top-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #776e65;
+}
+
+.brand-subtitle {
+  font-size: 12px;
+  color: #8f7a66;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8f7a66;
+}
+
+.lang-label {
+  font-size: 11px;
+}
+
+.lang-button {
+  border: none;
+  outline: none;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(238, 228, 218, 0.9);
+  color: #776e65;
+}
+
+.lang-button-active {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+/* 次级按钮样式（Undo / Hint） */
+.btn-secondary {
+  background: #eee4da;
+  color: #776e65;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #ede0c8;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* 兼容原有逻辑中的 mode-tab-active 类名 */
+.mode-tab-active {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+
+/* 模式分段选择，突出四种模式 */
+.mode-tabs {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(238, 228, 218, 0.9);
+  gap: 3px;
+}
+
+.mode-tab {
+  flex: 1;
+  min-width: 72px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #8f7a66;
+}
+
+.mode-tab-active {
+  background: #8f7a66;
+  color: #f9f6f2;
+}
+
+.mode-description {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #8f7a66;
+}
+
+/* 难度区域稍微更醒目一些 */
+.difficulty-select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(143, 122, 102, 0.18);
+}
+
+.difficulty-label {
+  font-size: 11px;
+  color: #f9f6f2;
+  margin-bottom: 4px;
+}
+
+.difficulty-control {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
