@@ -1,13 +1,13 @@
 /**
  * @Author:XYH
- * @Date:2025-11-23
- * @Description:
- *  React 应用入口文件，将根组件 App 挂载到页面中的 #root 容器。
+ * @Date:2025-11-24
+ * @Description: 应用入口，挂载 React 根组件
  */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App";
-import "./styles.css";
+import App from "./App";
+import "./styles/global.css";
+import "./styles/themes.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

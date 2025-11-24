@@ -1,0 +1,73 @@
+/* 默认亮色 Forest 风格 */
+body {
+  --bg-page: #f3f4f6;
+  --fg-main: #111827;
+  --fg-muted: #6b7280;
+  --card-bg: #ffffff;
+  --board-bg: #e5e7eb;
+  --tile-bg: #f9fafb;
+  --tile-empty-bg: #e5e7eb;
+  --pill-bg: #e5e7eb;
+  --pill-fg: #374151;
+  --pill-active-bg: #111827;
+  --pill-active-fg: #f9fafb;
+  --pill-active-border: #111827;
+  --btn-primary-bg: #111827;
+  --btn-primary-fg: #f9fafb;
+}
+
+body[data-theme="forest"] {
+  --board-bg: linear-gradient(135deg, #e5f7eb, #e5e7eb);
+  --tile-bg: #ffffff;
+}
+
+/* Desert 主题 */
+body[data-theme="desert"] {
+  --bg-page: #faf5e4;
+  --fg-main: #1f2933;
+  --fg-muted: #6c7a89;
+  --card-bg: #fff7e6;
+  --board-bg: linear-gradient(135deg, #f6d7a7, #f5e8c7);
+  --tile-bg: #fffaf0;
+  --tile-empty-bg: #f7ead4;
+  --pill-bg: rgba(148, 81, 32, 0.08);
+  --pill-active-bg: #f97316;
+  --pill-active-fg: #7c2d12;
+  --pill-active-border: #fdba74;
+  --btn-primary-bg: #f97316;
+  --btn-primary-fg: #7c2d12;
+}
+
+/* Snow 主题 */
+body[data-theme="snow"] {
+  --bg-page: #e5f3ff;
+  --fg-main: #0f172a;
+  --fg-muted: #6b7280;
+  --card-bg: #ffffff;
+  --board-bg: linear-gradient(135deg, #dbeafe, #eff6ff);
+  --tile-bg: #f1f5f9;
+  --tile-empty-bg: #e5f3ff;
+  --pill-bg: rgba(37, 99, 235, 0.08);
+  --pill-active-bg: #3b82f6;
+  --pill-active-fg: #0b1120;
+  --pill-active-border: #93c5fd;
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-fg: #eff6ff;
+}
+
+/* Galaxy 深色皮肤 */
+body[data-theme="galaxy"] {
+  --bg-page: radial-gradient(circle at top, #4c1d95, #020617);
+  --fg-main: #f9fafb;
+  --fg-muted: #e5e7eb;
+  --card-bg: rgba(15, 23, 42, 0.95);
+  --board-bg: radial-gradient(circle at top, #1e1b4b, #020617);
+  --tile-bg: #312e81;
+  --tile-empty-bg: #020617;
+  --pill-bg: rgba(129, 140, 248, 0.14);
+  --pill-active-bg: #a855f7;
+  --pill-active-fg: #fdf2ff;
+  --pill-active-border: #e9d5ff;
+  --btn-primary-bg: #a855f7;
+  --btn-primary-fg: #fdf2ff;
+}

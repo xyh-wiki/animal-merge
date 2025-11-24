@@ -1,0 +1,423 @@
+/**
+ * @Author:XYH
+ * @Date:2025-11-24
+ * @Description: 全局布局 + UI 风格 A + 右侧面板 / 排行 / 进化图示样式
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-page: #f3f4f6;
+  --fg-main: #111827;
+  --fg-muted: #6b7280;
+  --card-bg: #ffffff;
+  --board-bg: #e5e7eb;
+  --tile-bg: #f9fafb;
+  --tile-empty-bg: #e5e7eb;
+  --pill-bg: #e5e7eb;
+  --pill-fg: #374151;
+  --pill-active-bg: #111827;
+  --pill-active-fg: #f9fafb;
+  --pill-active-border: #111827;
+  --btn-primary-bg: #111827;
+  --btn-primary-fg: #f9fafb;
+  --border-subtle: #e5e7eb;
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --radius-card: 24px;
+  --radius-tile: 18px;
+  --radius-pill: 999px;
+  --transition-fast: 0.15s ease-out;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+  "Segoe UI", sans-serif;
+  background: var(--bg-page);
+  color: var(--fg-main);
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 布局：左侧游戏，右侧说明 */
+
+.layout-root {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr);
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .layout-root {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.layout-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.layout-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 顶部标题 & 语言 */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+
+.top-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.language-switch {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+/* pill / 按钮 */
+
+.pill {
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 12px;
+  border: 1px solid transparent;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast),
+  border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+}
+
+.pill-active {
+  background: var(--pill-active-bg);
+  color: var(--pill-active-fg);
+  border-color: var(--pill-active-border);
+}
+
+.btn-primary {
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  box-shadow: var(--shadow-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+  background var(--transition-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+  background: #000000;
+}
+
+/* 模式 & 主题 tabs */
+
+.mode-tabs,
+.theme-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.theme-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-label {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+/* 统计条 */
+
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.stat-box {
+  min-width: 90px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mode-chip {
+  margin-left: auto;
+  align-self: center;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--pill-bg);
+  color: var(--fg-muted);
+}
+
+/* 棋盘 */
+
+.board-wrapper {
+  margin-top: 4px;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--board-bg);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  outline: none;
+}
+
+.board-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-tile);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+  background var(--transition-fast);
+  font-size: 16px;
+}
+
+.tile-empty {
+  background: var(--tile-empty-bg);
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.5);
+}
+
+.tile-filled {
+  background: var(--tile-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.tile-emoji {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+
+.tile-name {
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+
+/* 右侧面板通用 */
+
+.panel {
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.panel h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.panel-desc {
+  margin: 4px 0 10px;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.panel-section {
+  margin-top: 8px;
+}
+
+.panel-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.panel-text {
+  margin: 0;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.panel-empty {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.bullet-list {
+  padding-left: 18px;
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+/* 动物进化图示 */
+
+.evolution-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evolution-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.evo-item {
+  min-width: 72px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.evo-emoji {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.evo-name {
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+
+.evo-arrow {
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+/* 排行榜 */
+
+.lb-list {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lb-row {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  padding: 2px 0;
+}
+
+.lb-rank {
+  width: 26px;
+  color: var(--fg-muted);
+}
+
+.lb-main {
+  flex: 1;
+}
+
+.lb-sub {
+  width: 80px;
+  text-align: right;
+  color: var(--fg-muted);
+}
+
+/* 页脚 */
+
+.footer {
+  margin-top: auto;
+  padding: 8px 16px 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+/* 最高动物闪光效果 */
+.tile-highlight {
+  animation: tileFlash 0.45s ease-out;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.9),
+  0 0 18px rgba(251, 191, 36, 0.8);
+}
+
+@keyframes tileFlash {
+  0% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 排行榜中最高动物 emoji 样式 */
+.lb-emoji {
+  display: inline-block;
+  margin-right: 4px;
+}
