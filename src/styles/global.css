@@ -391,15 +391,6 @@ body {
   color: var(--fg-muted);
 }
 
-/* 页脚 */
-
-.footer {
-  margin-top: auto;
-  padding: 8px 16px 16px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--fg-muted);
-}
 /* 最高动物闪光效果 */
 .tile-highlight {
   animation: tileFlash 0.45s ease-out;
