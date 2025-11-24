@@ -36,7 +36,7 @@ const CLASSIC_KEY = "amj_classic_records";
 /** Daily 当日榜 key 前缀 */
 const DAILY_KEY_PREFIX = "amj_daily_records_";
 
-type Lang = "en" | "zh";
+type Lang = "en" | "zh" | "ja" | "ko" | "fr" | "es" | "de";
 
 /** 多语言文案 */
 const TEXTS: Record<Lang, any> = {
@@ -45,10 +45,17 @@ const TEXTS: Record<Lang, any> = {
     title: "Animal Merge Journey",
     subtitle: "A light-weight animal evolution swipe puzzle with multiple modes and themes.",
     btnNewGame: "New Game",
+    btnUndo: "Undo",
+    btnHint: "Hint",
+    winTitle: "You win!",
+    winDesc:
+        "You have reached the final animal. Start a new journey or try another mode.",
     labelScore: "Score",
     labelMoves: "Moves",
     labelHighest: "Highest",
     labelTheme: "Theme",
+    labelUndoLeft: "Undo left",
+    labelHintLeft: "Hints left",
     howToPlay: "How to play?",
     howBullets: [
       "Use arrow keys or swipe to move all animals.",
@@ -79,10 +86,16 @@ const TEXTS: Record<Lang, any> = {
     title: "Animal Merge Journey",
     subtitle: "轻量级动物进化消除小游戏，支持多种模式与主题皮肤。",
     btnNewGame: "新开一局",
+    btnUndo: "撤销一步",
+    btnHint: "提示一步",
+    winTitle: "通关啦！",
+    winDesc: "你已经进化到最终动物，可以重新开局或尝试其他模式。",
     labelScore: "得分",
     labelMoves: "步数",
     labelHighest: "最高动物",
     labelTheme: "主题",
+    labelUndoLeft: "剩余撤销",
+    labelHintLeft: "剩余提示",
     howToPlay: "怎么玩？",
     howBullets: [
       "使用方向键或滑动操作，让所有动物一起移动。",
@@ -106,6 +119,219 @@ const TEXTS: Record<Lang, any> = {
     lbDailyPrefix: "每日挑战",
     lbDailyEmpty:
         "今天的每日挑战还没有任何记录，完成一局后点击“新开一局”即可保存。"
+  },
+  ja: {
+    language: "言語",
+    title: "Animal Merge Journey",
+    subtitle:
+      "かわいい動物を合体させて進化させる、シンプルでリラックスできるパズルゲームです。",
+    btnNewGame: "新しいゲーム",
+    btnUndo: "一手戻す",
+    btnHint: "ヒント",
+    winTitle: "クリア！",
+    winDesc:
+      "最終の動物まで進化しました。もう一度遊ぶか、別のモードを試してみましょう。",
+    labelScore: "スコア",
+    labelMoves: "手数",
+    labelHighest: "最高ランク",
+    labelTheme: "テーマ",
+    labelUndoLeft: "残りアンドゥ",
+    labelHintLeft: "残りヒント",
+    howToPlay: "遊び方",
+    howBullets: [
+      "矢印キーまたはスワイプで全ての動物を動かします。",
+      "同じ動物同士が重なると、1段階上の動物に進化します。",
+      "できるだけ Dragon、Phoenix、Unicorn を目指しましょう。"
+    ],
+    evoDesc: "同じ動物を2つ重ねると、次の進化段階の動物になります。",
+    faqTitle: "よくある質問",
+    faq1Q: "これはあの有名な数字パズルゲームと同じですか？",
+    faq1A:
+      "基本ルールは似ていますが、数字の代わりに動物を使い、複数のモードとテーマを追加しています。",
+    faq2Q: "スマホでも遊べますか？",
+    faq2A:
+      "はい。盤面の上で上下左右にスワイプすることで動物を動かせます。スワイプ中にページはスクロールしません。",
+    faq3Q: "このゲームは無料ですか？",
+    faq3A:
+      "完全無料です。今後、サーバー維持のために少量の広告が表示される可能性があります。",
+    lbTitle: "ランキング",
+    lbClassic: "クラシックモード - 通算",
+    lbClassicEmpty:
+      "クラシックモードの記録はまだありません。1回プレイして「新しいゲーム」を押すと保存されます。",
+    lbDailyPrefix: "デイリーチャレンジ",
+    lbDailyEmpty:
+      "今日のデイリーチャレンジにはまだ記録がありません。1回クリアして「新しいゲーム」を押すと保存されます。"
+  },
+  ko: {
+    language: "언어",
+    title: "Animal Merge Journey",
+    subtitle:
+      "귀여운 동물들을 합치며 진화시키는 편안한 퍼즐 게임입니다. 단순하지만 중독성 있는 플레이를 즐겨보세요.",
+    btnNewGame: "새 게임",
+    btnUndo: "한 수 되돌리기",
+    btnHint: "힌트",
+    winTitle: "클리어!",
+    winDesc:
+      "최종 동물까지 진화했습니다. 새로 시작하거나 다른 모드를 시도해 보세요.",
+    labelScore: "점수",
+    labelMoves: "이동 횟수",
+    labelHighest: "최고 등급",
+    labelTheme: "테마",
+    labelUndoLeft: "남은 되돌리기",
+    labelHintLeft: "남은 힌트",
+    howToPlay: "플레이 방법",
+    howBullets: [
+      "방향키 또는 스와이프로 모든 동물을 한 번에 이동시킵니다.",
+      "같은 동물이 만나면 합쳐져서 더 높은 단계의 동물로 진화합니다.",
+      "가능한 한 Dragon, Phoenix, Unicorn까지 진화시켜 보세요."
+    ],
+    evoDesc: "같은 동물 두 마리를 합치면 다음 단계의 동물로 진화합니다.",
+    faqTitle: "자주 묻는 질문",
+    faq1Q: "클래식 숫자 퍼즐 게임과 같은 게임인가요?",
+    faq1A:
+      "핵심 규칙은 비슷하지만, 숫자 대신 귀여운 동물을 사용하고 다양한 모드와 테마를 추가했습니다。",
+    faq2Q: "모바일에서도 플레이할 수 있나요?",
+    faq2A:
+      "네. 보드 위에서 위/아래/왼쪽/오른쪽으로 스와이프하면 동물이 움직입니다. 스와이프하는 동안 페이지는 스크롤되지 않습니다。",
+    faq3Q: "이 게임은 무료인가요?",
+    faq3A:
+      "완전 무료입니다. 추후 서버 운영을 위해 소량의 광고가 추가될 수 있습니다。",
+    lbTitle: "리더보드",
+    lbClassic: "클래식 모드 - 전체",
+    lbClassicEmpty:
+      "아직 클래식 모드 기록이 없습니다. 한 판 플레이 후 \"새 게임\"을 누르면 기록이 저장됩니다。",
+    lbDailyPrefix: "일일 챌린지",
+    lbDailyEmpty:
+      "오늘의 일일 챌린지 기록이 없습니다. 한 판 클리어 후 \"새 게임\"을 누르면 저장됩니다。"
+  },
+  fr: {
+    language: "Langue",
+    title: "Animal Merge Journey",
+    subtitle:
+      "Un jeu de puzzle relaxant où vous fusionnez des animaux pour les faire évoluer vers des formes toujours plus puissantes.",
+    btnNewGame: "Nouvelle partie",
+    btnUndo: "Annuler le coup",
+    btnHint: "Indice",
+    winTitle: "Victoire !",
+    winDesc:
+      "Vous avez atteint l'animal final. Lancez une nouvelle partie ou essayez un autre mode.",
+    labelScore: "Score",
+    labelMoves: "Coups joués",
+    labelHighest: "Niveau maximal",
+    labelTheme: "Thème",
+    labelUndoLeft: "Annulations restantes",
+    labelHintLeft: "Indices restants",
+    howToPlay: "Comment jouer ?",
+    howBullets: [
+      "Utilisez les flèches du clavier ou faites glisser pour déplacer tous les animaux.",
+      "Deux animaux identiques fusionnent et évoluent vers un niveau supérieur.",
+      "Essayez d'atteindre Dragon, Phoenix et Unicorn."
+    ],
+    evoDesc:
+      "Fusionnez deux animaux identiques pour obtenir le suivant dans la chaîne d'évolution.",
+    faqTitle: "FAQ",
+    faq1Q: "Est-ce le même jeu que le célèbre puzzle de nombres ?",
+    faq1A:
+      "La logique de base est similaire, mais nous utilisons des animaux mignons à la place des nombres, avec des modes et des thèmes supplémentaires.",
+    faq2Q: "Puis-je y jouer sur mobile ?",
+    faq2A:
+      "Oui. Faites glisser sur le plateau vers le haut, le bas, la gauche ou la droite pour déplacer les animaux. La page ne défilera pas pendant le geste.",
+    faq3Q: "Le jeu est-il gratuit ?",
+    faq3A:
+      "Oui, Animal Merge Journey est entièrement gratuit. Il se peut que quelques publicités soient ajoutées plus tard pour soutenir l'hébergement.",
+    lbTitle: "Classements",
+    lbClassic: "Classique – Tous les temps",
+    lbClassicEmpty:
+      "Aucun score en mode classique pour le moment. Jouez une partie classique puis cliquez sur \"Nouvelle partie\" pour l'enregistrer.",
+    lbDailyPrefix: "Défi du jour",
+    lbDailyEmpty:
+      "Aucun score pour le défi du jour. Terminez une partie puis cliquez sur \"Nouvelle partie\" pour l'enregistrer."
+  },
+  es: {
+    language: "Idioma",
+    title: "Animal Merge Journey",
+    subtitle:
+      "Un juego de rompecabezas relajante donde fusionas animales para hacerlos evolucionar hasta la criatura final.",
+    btnNewGame: "Nueva partida",
+    btnUndo: "Deshacer jugada",
+    btnHint: "Pista",
+    winTitle: "¡Has ganado!",
+    winDesc:
+      "Has alcanzado el animal final. Empieza una nueva partida o prueba otro modo.",
+    labelScore: "Puntuación",
+    labelMoves: "Movimientos",
+    labelHighest: "Nivel máximo",
+    labelTheme: "Tema",
+    labelUndoLeft: "Deshacer restantes",
+    labelHintLeft: "Pistas restantes",
+    howToPlay: "¿Cómo se juega?",
+    howBullets: [
+      "Usa las teclas de flecha o desliza para mover todos los animales.",
+      "Dos animales iguales se fusionan y evolucionan a un nivel superior.",
+      "Intenta llegar a Dragon, Phoenix y Unicorn."
+    ],
+    evoDesc:
+      "Fusiona dos animales iguales para evolucionar al siguiente en la cadena.",
+    faqTitle: "Preguntas frecuentes",
+    faq1Q: "¿Es lo mismo que el clásico juego de números?",
+    faq1A:
+      "La lógica básica es similar, pero usamos animales adorables en lugar de números, y añadimos modos y temas extra.",
+    faq2Q: "¿Puedo jugar en el móvil?",
+    faq2A:
+      "Sí. Desliza sobre el tablero (arriba, abajo, izquierda, derecha) para mover los animales. La página no se desplazará mientras deslizas.",
+    faq3Q: "¿Este juego es gratuito?",
+    faq3A:
+      "Totalmente. Animal Merge Journey es gratis. En el futuro podríamos mostrar algunos anuncios para mantener el servidor.",
+    lbTitle: "Clasificaciones",
+    lbClassic: "Clásico – Historial",
+    lbClassicEmpty:
+      "Todavía no hay puntuaciones en modo clásico. Juega una partida y haz clic en «Nueva partida» para guardarla.",
+    lbDailyPrefix: "Desafío diario",
+    lbDailyEmpty:
+      "Todavía no hay puntuaciones para el desafío diario de hoy. Completa una partida y haz clic en «Nueva partida» para guardarla."
+  },
+  de: {
+    language: "Sprache",
+    title: "Animal Merge Journey",
+    subtitle:
+      "Ein entspannendes Puzzlespiel, in dem du Tiere kombinierst und sie bis zur finalen Evolution weiterentwickelst.",
+    btnNewGame: "Neues Spiel",
+    btnUndo: "Zug zurücknehmen",
+    btnHint: "Hinweis",
+    winTitle: "Gewonnen!",
+    winDesc:
+      "Du hast das letzte Tier erreicht. Starte eine neue Runde oder probiere einen anderen Modus aus.",
+    labelScore: "Punkte",
+    labelMoves: "Züge",
+    labelHighest: "Höchste Stufe",
+    labelTheme: "Thema",
+    labelUndoLeft: "Rücknahmen übrig",
+    labelHintLeft: "Hinweise übrig",
+    howToPlay: "Wie wird gespielt?",
+    howBullets: [
+      "Bewege alle Tiere mit den Pfeiltasten oder durch Wischen.",
+      "Gleiche Tiere verschmelzen und entwickeln sich zu einer höheren Stufe.",
+      "Versuche, Dragon, Phoenix und Unicorn zu erreichen."
+    ],
+    evoDesc:
+      "Kombiniere zwei gleiche Tiere, um das nächste in der Evolutionskette zu erhalten.",
+    faqTitle: "FAQ",
+    faq1Q: "Ist das dasselbe wie das klassische Zahlenpuzzle?",
+    faq1A:
+      "Die Grundlogik ist ähnlich, aber wir verwenden niedliche Tiere statt Zahlen und bieten zusätzliche Modi und Themen.",
+    faq2Q: "Kann ich das Spiel auf dem Handy spielen?",
+    faq2A:
+      "Ja. Wische auf dem Spielfeld nach oben, unten, links oder rechts, um die Tiere zu bewegen. Währenddessen scrollt die Seite nicht.",
+    faq3Q: "Ist dieses Spiel kostenlos?",
+    faq3A:
+      "Ja, Animal Merge Journey ist kostenlos spielbar. Möglicherweise fügen wir später ein paar Anzeigen hinzu, um den Betrieb zu finanzieren.",
+    lbTitle: "Bestenlisten",
+    lbClassic: "Klassisch – Alle Zeiten",
+    lbClassicEmpty:
+      "Es gibt noch keine Einträge im klassischen Modus. Spiele eine Runde und klicke auf „Neues Spiel“, um deinen Score zu speichern.",
+    lbDailyPrefix: "Tages-Challenge",
+    lbDailyEmpty:
+      "Für die heutige Tages-Challenge gibt es noch keine Einträge. Beende eine Runde und klicke auf „Neues Spiel“, um deinen Score zu speichern."
   }
 };
 
@@ -255,6 +481,9 @@ const GameBoard: React.FC = () => {
   }
 
   const modeCfg = getMode(modeKey);
+  const highestInfoForWin = animalMap[game.state.highestValue] || null;
+  const highestEmojiForWin = highestInfoForWin?.emoji ?? "";
+  const highestNameForWin = highestInfoForWin?.name ?? "";
 
   return (
       <div className="layout-root">
@@ -269,22 +498,39 @@ const GameBoard: React.FC = () => {
             <div className="top-right">
               <div className="language-switch">
                 <span>{t.language}</span>
-                <button
-                    className={`pill ${lang === "en" ? "pill-active" : ""}`}
-                    onClick={() => setLang("en")}
+                <select
+                  className="language-select"
+                  value={lang}
+                  onChange={(e) => setLang(e.target.value as Lang)}
                 >
-                  EN
+                  <option value="en">EN</option>
+                  <option value="zh">中文</option>
+                  <option value="ja">日本語</option>
+                  <option value="ko">한국어</option>
+                  <option value="fr">FR</option>
+                  <option value="es">ES</option>
+                  <option value="de">DE</option>
+                </select>
+              </div>
+              <div className="top-actions">
+                <button
+                  className="pill"
+                  onClick={game.undo}
+                  disabled={game.state.remainingUndo <= 0}
+                >
+                  ⏪ {t.btnUndo} ({game.state.remainingUndo})
                 </button>
                 <button
-                    className={`pill ${lang === "zh" ? "pill-active" : ""}`}
-                    onClick={() => setLang("zh")}
+                  className="pill"
+                  onClick={game.hint}
+                  disabled={game.state.remainingHint <= 0}
                 >
-                  中文
+                  💡 {t.btnHint} ({game.state.remainingHint})
+                </button>
+                <button className="btn-primary" onClick={handleNewGameClick}>
+                  {t.btnNewGame}
                 </button>
               </div>
-              <button className="btn-primary" onClick={handleNewGameClick}>
-                {t.btnNewGame}
-              </button>
             </div>
           </header>
 
@@ -317,6 +563,14 @@ const GameBoard: React.FC = () => {
             <div className="stat-box">
               <div className="stat-label">{t.labelHighest}</div>
               <div className="stat-value">{game.getHighestAnimalName()}</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-label">{t.labelUndoLeft}</div>
+              <div className="stat-value">{game.state.remainingUndo}</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-label">{t.labelHintLeft}</div>
+              <div className="stat-value">{game.state.remainingHint}</div>
             </div>
             <div className="mode-chip">{modeCfg.label}</div>
           </div>
@@ -356,6 +610,12 @@ const GameBoard: React.FC = () => {
               )}
             </div>
           </div>
+          {game.state.lastHintDirection && (
+            <div className="hint-banner">
+              {/* 简单英文 / 中文通用提示文案 */}
+              Recommended move: {game.state.lastHintDirection.toUpperCase()}
+            </div>
+          )}
         </div>
 
         {/* 右侧信息区 */}
@@ -459,6 +719,118 @@ const GameBoard: React.FC = () => {
             </div>
           </div>
         </aside>
+
+        {/* 游戏胜利遮罩提示：达到最终动物时显示 */}
+        {game.state.gameWin && (
+          <div
+            className="game-win-mask"
+            style={{
+              position: "fixed",
+              inset: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.55)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1000
+            }}
+          >
+            <div
+              className="game-over-dialog"
+              style={{
+                backgroundColor: "#111827",
+                color: "#fff",
+                padding: "24px 28px",
+                borderRadius: 16,
+                maxWidth: 420,
+                width: "90%",
+                boxShadow: "0 22px 60px rgba(0,0,0,0.7)",
+                textAlign: "center",
+                border: "1px solid rgba(250, 204, 21, 0.6)"
+              }}
+            >
+              <h2 style={{ fontSize: "22px", marginBottom: 12 }}>
+                {t.winTitle}
+              </h2>
+              <div
+                style={{
+                  fontSize: "40px",
+                  marginBottom: 12
+                }}
+              >
+                {highestEmojiForWin}
+              </div>
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  marginBottom: 8
+                }}
+              >
+                {highestNameForWin}
+              </div>
+              <p
+                style={{
+                  fontSize: "14px",
+                  lineHeight: 1.6,
+                  marginBottom: 20
+                }}
+              >
+                {t.winDesc}
+              </p>
+              <button
+                className="btn-primary"
+                style={{ padding: "8px 18px", borderRadius: 999 }}
+                onClick={handleNewGameClick}
+              >
+                🏆 {t.btnNewGame}
+              </button>
+            </div>
+          </div>
+        )}
+        {/* 游戏失败遮罩提示：没有可用移动时显示 */}
+        {game.state.gameOver && (
+          <div
+            className="game-over-mask"
+            style={{
+              position: "fixed",
+              inset: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.55)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 999
+            }}
+          >
+            <div
+              className="game-over-dialog"
+              style={{
+                backgroundColor: "#1f2933",
+                color: "#fff",
+                padding: "24px 28px",
+                borderRadius: 12,
+                maxWidth: 360,
+                width: "90%",
+                boxShadow: "0 18px 45px rgba(0,0,0,0.55)",
+                textAlign: "center"
+              }}
+            >
+              <h2 style={{ fontSize: "20px", marginBottom: 12 }}>
+                Game Over
+              </h2>
+              <p style={{ fontSize: "14px", lineHeight: 1.6, marginBottom: 20 }}>
+                No more valid moves on the board.
+                <br />
+              </p>
+              <button
+                className="btn-primary"
+                style={{ padding: "8px 18px", borderRadius: 999 }}
+                onClick={handleNewGameClick}
+              >
+                🔁 New Game
+              </button>
+            </div>
+          </div>
+        )}
       </div>
   );
 };
